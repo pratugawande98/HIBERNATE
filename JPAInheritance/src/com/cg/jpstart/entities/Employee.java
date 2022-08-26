@@ -1,6 +1,7 @@
 package com.cg.jpstart.entities;
 import java.io.Serializable;
-
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,24 +10,23 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 @Entity
-@Table(name="emp_store")
-@Inheritance(strategy=InheritanceType.JOINED)	
-public class Employee implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@Table(name="employee")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="emp_type")
+@DiscriminatorValue("EMP")
+public class Employee implements Serializable
+{
+	private static final long serialVersionUID=1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int employeeId;
+	private int id;
 	private String name;
 	private double salary;
-	public int getEmployeeId() {
-		return employeeId;
+	public int getId() {
+		return id;
 	}
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -41,7 +41,6 @@ public class Employee implements Serializable {
 		this.salary = salary;
 	}
 	
-	
-	
-
+		
 }
+	
